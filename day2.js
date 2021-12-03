@@ -18,7 +18,6 @@ const day2 = () => {
             return agg;
         }, [])
         .reduce((agg, current, idx, arr) => {
-            console.log(arr);
             if(idx > 0 && current > arr[idx-1]) {
                 agg += 1;
             }
