@@ -9,7 +9,10 @@ const day3 = () => {
     }
 
     const powerConsumption = calculatePowerConsumption(data);
-    console.log(`Day 3: ${powerConsumption}`);
+    const oxygenRating = calculateOxGenRating(data);
+    const co2ScrubRating = calculateCO2ScrubRating(data);
+    const lifeSupportRating = oxygenRating * co2ScrubRating;
+    console.log(`Day 3: ${powerConsumption} O2 rating: ${oxygenRating} CO2 Scrub Rating: ${co2ScrubRating} Life Support Rating: ${lifeSupportRating}`);
 }
 
 const calculatePowerConsumption = (values) => {
@@ -25,4 +28,29 @@ const calculatePowerConsumption = (values) => {
     return gamma * epsilon;
 }
 
+const calculateOxGenRating = (values) => {
+    let lines = values.split('\n');
+    for (let i = 0; lines.length > 1 && i < lines[0].length; i++) {
+        let oneCount = lines.reduce((agg, value) => {
+            return agg += (Number(value[i]) === 1 ? 1 : 0);
+        }, 0);
+        lines = lines.filter((value) => {
+            return Number(value[i]) === (oneCount >= lines.length/2 ? 1 : 0);
+        });
+    }
+    return parseInt(lines[0], 2);
+}
+
+const calculateCO2ScrubRating = (values) => {
+    let lines = values.split('\n');
+    for (let i = 0; lines.length > 1 && i < lines[0].length; i++) {
+        let oneCount = lines.reduce((agg, value) => {
+            return agg += (Number(value[i]) === 1 ? 1 : 0);
+        }, 0);
+        lines = lines.filter((value) => {
+            return Number(value[i]) === (oneCount < lines.length/2 ? 1 : 0);
+        });
+    }
+    return parseInt(lines[0], 2);
+}
 export default day3
