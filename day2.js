@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const day1 = () => {
+const day2 = () => {
     let data;
     try {
         data = fs.readFileSync('inputs/day_1.txt', 'utf8');
@@ -12,13 +12,21 @@ const day1 = () => {
         .split('\n')
         .map(item => Number(item))
         .reduce((agg, current, idx, arr) => {
+            if(idx + 2 < arr.length) {
+                agg.push(current + arr[idx+1] + arr[idx+2]);
+            }
+            return agg;
+        }, [])
+        .reduce((agg, current, idx, arr) => {
+            console.log(arr);
             if(idx > 0 && current > arr[idx-1]) {
                 agg += 1;
             }
             return agg;
         }, 0);
 
-    console.log(`Day 1: ${increases}`);
+
+    console.log(`Day 2: ${increases}`);
 }
 
-export default day1
+export default day2
