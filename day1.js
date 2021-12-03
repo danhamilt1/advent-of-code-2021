@@ -8,7 +8,7 @@ const day1 = () => {
         console.error(err)
     }
 
-    const increases = data
+    const part1 = data
         .split('\n')
         .map(item => Number(item))
         .reduce((agg, current, idx, arr) => {
@@ -18,7 +18,27 @@ const day1 = () => {
             return agg;
         }, 0);
 
-    console.log(`Day 1: ${increases}`);
+    console.log(`Day 1 part 1: ${part1}`);
+
+
+    const part2 = data
+        .split('\n')
+        .map(item => Number(item))
+        .reduce((agg, current, idx, arr) => {
+            if(idx + 2 < arr.length) {
+                agg.push(current + arr[idx+1] + arr[idx+2]);
+            }
+            return agg;
+        }, [])
+        .reduce((agg, current, idx, arr) => {
+            if(idx > 0 && current > arr[idx-1]) {
+                agg += 1;
+            }
+            return agg;
+        }, 0);
+
+
+    console.log(`Day 1 part 2: ${part2}`);
 }
 
 export default day1

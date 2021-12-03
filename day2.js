@@ -3,29 +3,42 @@ import fs from 'fs';
 const day2 = () => {
     let data;
     try {
-        data = fs.readFileSync('inputs/day_1.txt', 'utf8');
+        data = fs.readFileSync('inputs/day_2.txt', 'utf8');
     } catch (err) {
         console.error(err)
     }
 
-    const increases = data
+    const part1Result = Object.values(data
         .split('\n')
-        .map(item => Number(item))
-        .reduce((agg, current, idx, arr) => {
-            if(idx + 2 < arr.length) {
-                agg.push(current + arr[idx+1] + arr[idx+2]);
+        .reduce((agg, value) => {
+            const command = value.split(' ');
+            if (command[0] === 'forward') {
+                agg.horizontal += Number(command[1]);
+            } else if (command[0] === 'up') {
+                agg.depth -= Number(command[1]);
+            } else {
+                agg.depth += Number(command[1]);
             }
             return agg;
-        }, [])
-        .reduce((agg, current, idx, arr) => {
-            if(idx > 0 && current > arr[idx-1]) {
-                agg += 1;
+        }, {horizontal: 0, depth: 0})).reduce((a,b) => a*b);
+
+    const part2Result = data
+        .split('\n')
+        .reduce((agg, value) => {
+            const command = value.split(' ');
+            if (command[0] === 'forward') {
+                agg.horizontal += Number(command[1]);
+                agg.depth += agg.aim === 0 ? 0 : Number(command[1]) * agg.aim;
+            } else if (command[0] === 'up') {
+                agg.aim -= Number(command[1]);
+            } else {
+                agg.aim += Number(command[1]);
             }
             return agg;
-        }, 0);
+        }, {horizontal: 0, depth: 0, aim: 0});
+    
 
-
-    console.log(`Day 2: ${increases}`);
+    console.log(`Day 2: ${part1Result} ${part2Result.horizontal * part2Result.depth}`);
 }
 
 export default day2

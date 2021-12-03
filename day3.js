@@ -12,7 +12,7 @@ const day3 = () => {
     const oxygenRating = calculateOxGenRating(data);
     const co2ScrubRating = calculateCO2ScrubRating(data);
     const lifeSupportRating = oxygenRating * co2ScrubRating;
-    console.log(`Day 3: ${powerConsumption} O2 rating: ${oxygenRating} CO2 Scrub Rating: ${co2ScrubRating} Life Support Rating: ${lifeSupportRating}`);
+    console.log(`Day 3 part 1: (${powerConsumption}), part 2: (O2 rating: ${oxygenRating}, CO2 Scrub Rating: ${co2ScrubRating}, Life Support Rating: ${lifeSupportRating})`);
 }
 
 const calculatePowerConsumption = (values) => {
