@@ -11,8 +11,8 @@ const day1 = () => {
     const increases = data
         .split('\n')
         .map(item => Number(item))
-        .reduce((agg, current, idx) => {
-            if(idx > 0 && current > depths[idx-1]) {
+        .reduce((agg, current, idx, arr) => {
+            if(idx > 0 && current > arr[idx-1]) {
                 agg += 1;
             }
             return agg;
