@@ -8,10 +8,11 @@ const day3 = () => {
         console.error(err)
     }
 
-    calculateGamma(data);
+    const powerConsumption = calculatePowerConsumption(data);
+    console.log(`Day 3: ${powerConsumption}`);
 }
 
-const calculateGamma = (values) => {
+const calculatePowerConsumption = (values) => {
     const lines = values.split('\n');
     const allOnes = lines
         .reduce((agg, value, idx, arr) => {
@@ -21,7 +22,7 @@ const calculateGamma = (values) => {
     
     const gamma = parseInt(allOnes.map(value => value > lines.length/2 ? 1 : 0).join(''), 2);
     const epsilon = parseInt(allOnes.map(value => value > lines.length/2 ? 0 : 1).join(''), 2);
-    console.log(`Day 3: ${gamma * epsilon}`);
+    return gamma * epsilon;
 }
 
 export default day3
