@@ -74,7 +74,7 @@ const day5 = () => {
         return agg;
     }, 0);
 
-    console.log(`Day 4: pt2. ${result}`)
+    console.log(`Day 5: pt2. ${result}`)
 }
 
 
